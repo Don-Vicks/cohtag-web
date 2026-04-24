@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Post Graduate Website</title>
+    <style>
+      body {
+        font-family: system-ui, -apple-system, sans-serif;
+        padding: 2rem;
+      }
+      .form-container {
+        max-width: 400px;
+      }
+      .form-group {
+        margin-bottom: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      input, select {
+        padding: 0.5rem;
+        font-size: 1rem;
+      }
+      .error {
+        color: #ef4444;
+        font-size: 0.875rem;
+        display: none;
+        margin-top: 0.25rem;
+      }
+      .actions {
+        margin-top: 1.5rem;
+        display: flex;
+        gap: 1rem;
+      }
+      button {
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <h2>Post Graduate Registration</h2>
+      <form id="myForm" onsubmit="return registerStudent(event)">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" placeholder="Enter your name" required />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Institution Email</label>
+          <input type="email" id="email" placeholder="e.g. student@naub.edu.ng" required />
+          <span id="emailError" class="error">Please use a valid institution email ending with @naub.edu.ng</span>
+        </div>
+
+        <div class="form-group">
+          <label for="course">Course</label>
+          <select id="course">
+            <option value="Software Engineering">Software Engineering</option>
+            <option value="Computer Science">Computer Science</option>
+            <option value="Information Technology">Information Technology</option>
+          </select>
+        </div>
+
+        <div class="actions">
+          <button type="submit">Submit</button>
+          <button type="reset" onclick="document.getElementById('emailError').style.display = 'none'">Reset</button>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      function registerStudent(event) {
+        event.preventDefault();
+        
+        var emailInput = document.getElementById('email').value;
+        var emailError = document.getElementById('emailError');
+        
+        // Check if the email ends with the institution domain
+        if (!emailInput.toLowerCase().endsWith('@naub.edu.ng')) {
+          emailError.style.display = 'block';
+          return false;
+        }
+        
+        emailError.style.display = 'none';
+        
+        var nameInput = document.getElementById('name').value;
+        var courseInput = document.getElementById('course').value;
+        
+        console.log('Student Registered:', {
+          name: nameInput,
+          email: emailInput,
+          course: courseInput
+        });
+        
+        alert('Registration successful!');
+        document.getElementById('myForm').reset();
+        
+        return true;
+      }
+    </script>
+  </body>
+</html>
