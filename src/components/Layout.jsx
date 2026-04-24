@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import { Link, Outlet, useLocation } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
-import './Layout.css'
+import { useState } from 'react'
+import { Link, Outlet, useLocation } from 'react-router-dom'
 import logoImg from '../assets/logo.jpg'
+import './Layout.css'
 
 const Layout = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -29,7 +29,7 @@ const Layout = () => {
       <header className='site-header'>
         <div className='container header-container'>
           <Link to='/' className='logo-link'>
-            <img src={logoImg} alt="COHTAG Logo" className="header-logo-img" />
+            <img src={logoImg} alt='COHTAG Logo' className='header-logo-img' />
             <div className='logo-text'>
               <span className='logo-abbr'>COHTAG</span>
               <span className='logo-full'>
@@ -155,7 +155,7 @@ const Layout = () => {
             </div>
             <div className='footer-col'>
               <h3>Contact Us</h3>
-              <p>National Secretariat</p>
+              <p>National Secretariat, School of Hygiene, Korle Bu Accra</p>
               <p>Email: cohtag@gmail.com</p>
               <p>Phone: +233 (0) XX XXX XXXX</p>
             </div>

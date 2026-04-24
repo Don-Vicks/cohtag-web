@@ -1,15 +1,13 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
 import {
   ArrowRight,
-  CheckCircle,
-  Heart,
-  Users,
   BookOpen,
+  CheckCircle,
   GraduationCap,
-  ShieldCheck,
   Megaphone,
+  ShieldCheck,
+  Users,
 } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import './Home.css'
 
 const Home = () => {
@@ -198,9 +196,9 @@ const Home = () => {
         <div className='container contact-container'>
           <h2>Have Questions or Need Assistance?</h2>
           <p>
-            The National Secretariat is available to address any inquiries
-            regarding membership, welfare initiatives, or regional branch
-            activities.
+            The National Secretariat, School of Hygiene, Korle Bu Accra is
+            available to address any inquiries regarding membership, welfare
+            initiatives, or regional branch activities.
           </p>
           <Link to='/contact' className='btn btn-primary btn-large'>
             Contact Us Today
