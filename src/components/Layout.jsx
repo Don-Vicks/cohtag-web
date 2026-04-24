@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import './Layout.css'
-
 import logoImg from '../assets/logo.jpg'
 
 const Layout = () => {
@@ -29,12 +28,8 @@ const Layout = () => {
     <div className='layout-wrapper'>
       <header className='site-header'>
         <div className='container header-container'>
-          <Link to='/' className='logo-link flex items-center gap-3'>
-            <img
-              src={logoImg}
-              alt='COHTAG Logo'
-              className='h-10 w-10 object-contain'
-            />
+          <Link to='/' className='logo-link'>
+            <img src={logoImg} alt="COHTAG Logo" className="header-logo-img" />
             <div className='logo-text'>
               <span className='logo-abbr'>COHTAG</span>
               <span className='logo-full'>
@@ -57,7 +52,7 @@ const Layout = () => {
                 </li>
               ))}
             </ul>
-            <Link to='/membership' className='btn btn-accent ml-4'>
+            <Link to='/membership' className='btn btn-accent header-btn'>
               Join COHTAG
             </Link>
           </nav>
@@ -104,7 +99,7 @@ const Layout = () => {
               <li>
                 <Link
                   to='/membership'
-                  className='mobile-nav-link text-accent font-bold'
+                  className='mobile-nav-link'
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Membership

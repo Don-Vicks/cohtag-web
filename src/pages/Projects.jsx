@@ -108,10 +108,10 @@ const Projects = () => {
       </section>
 
       {/* Commitment Section */}
-      <section className="commitment-section py-24 text-white text-center">
-        <div className="container max-w-2xl mx-auto">
-          <h2 className="text-white mb-6">Our Commitment</h2>
-          <p className="text-lg mb-8 opacity-90">
+      <section className="commitment-section py-24 text-center">
+        <div className="container commitment-container">
+          <h2 className="commitment-title">Our Commitment</h2>
+          <p className="commitment-text">
             COHTAG remains resolute in its mission to uplift the standard of health education in Ghana. 
             We are committed to transparency, inclusivity, and the relentless pursuit of better conditions 
             for every tutor in our association. Together, we build the foundation of Ghana's healthcare future.
