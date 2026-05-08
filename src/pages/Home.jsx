@@ -1,7 +1,10 @@
+import React, { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import {
   ArrowRight,
   BookOpen,
   CheckCircle,
+  ChevronDown,
   GraduationCap,
   Megaphone,
   ShieldCheck,
@@ -10,39 +13,156 @@ import {
 import { Link } from 'react-router-dom'
 import './Home.css'
 
+import heroEducators from '../assets/hero_educators.png'
+import heroGraduation from '../assets/cohtag_graduation.png'
+import heroResearch from '../assets/cohtag_research.png'
+import heroWelfare from '../assets/cohtag_welfare.png'
+
+const slides = [
+  {
+    image: heroEducators,
+    title: 'Excellence in Education, Leadership in Health.',
+    heading: (
+      <>
+        Colleges of Health Teachers’ <br className='desktop-only' />
+        <span className='text-gradient'>Association of Ghana</span>
+      </>
+    ),
+    subtitle:
+      'We are a unified body of Public health training institution teachers in Ghana, committed to advancing education, influencing policy, and promoting the welfare of our members.',
+  },
+  {
+    image: heroGraduation,
+    title: 'Empowering the Next Generation of Health Leaders.',
+    heading: (
+      <>
+        Advancing <span className='text-gradient'>Academic Excellence</span>
+        <br className='desktop-only' /> in Health Education
+      </>
+    ),
+    subtitle:
+      'Providing robust support and resources to ensure our health tutors are equipped with modern pedagogical skills and resources.',
+  },
+  {
+    image: heroResearch,
+    title: 'Driving Innovation through Research.',
+    heading: (
+      <>
+        Promoting <span className='text-gradient'>Research & Innovation</span>
+        <br className='desktop-only' /> in Healthcare
+      </>
+    ),
+    subtitle:
+      'Facilitating cutting-edge research and facilitating academic publications to drive systemic improvements in Ghana’s health sector.',
+  },
+]
+
 const Home = () => {
+  const [currentSlide, setCurrentSlide] = useState(0)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPos = window.scrollY
+      const heroSection = document.querySelector('.hero-section')
+      if (heroSection) {
+        const sectionHeight = heroSection.offsetHeight
+        
+        // Calculate slide based on scroll
+        const scrollThreshold = sectionHeight / (slides.length + 1)
+        const slideIndex = Math.max(0, Math.min(
+          Math.floor(scrollPos / scrollThreshold),
+          slides.length - 1
+        ))
+        setCurrentSlide(slideIndex)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
     <div className='home-wrapper'>
       {/* Modern Hero Section */}
       <section className='hero-section'>
-        <div className='container hero-container'>
-          <div className='hero-badge'>
-            <span className='badge-dot'></span>
-            Excellence in Education, Leadership in Health.
+        <div className='hero-sticky-wrapper'>
+          <AnimatePresence mode='wait'>
+            <motion.div
+              key={currentSlide}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1, ease: 'easeInOut' }}
+              className='hero-slide-bg'
+              style={{ 
+                backgroundImage: `linear-gradient(rgba(7, 70, 40, 0.8), rgba(7, 70, 40, 0.9)), url(${slides[currentSlide].image})` 
+              }}
+            >
+              <div className='container hero-container'>
+                <motion.div 
+                  initial={{ opacity: 0, y: 30, filter: 'blur(10px)' }}
+                  animate={{ opacity: 1, y: 0, filter: 'blur(0)' }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                  className='hero-content-wrapper'
+                >
+                  <motion.div 
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: 0.4 }}
+                    className='hero-badge'
+                  >
+                    <span className='badge-dot'></span>
+                    {slides[currentSlide].title}
+                  </motion.div>
+
+                  <h1 className='hero-title'>{slides[currentSlide].heading}</h1>
+
+                  <p className='hero-subtitle'>{slides[currentSlide].subtitle}</p>
+
+                  <div className='hero-ctas'>
+                    <Link to='/membership' className='btn btn-primary btn-large'>
+                      Join COHTAG
+                    </Link>
+                    <Link to='/about' className='btn btn-outline-light btn-large'>
+                      Learn More
+                    </Link>
+                    <Link to='/contact' className='btn btn-text btn-large'>
+                      Contact Us <ArrowRight size={20} />
+                    </Link>
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Vertical Slider Indicators */}
+          <div className='hero-indicators'>
+            {slides.map((_, index) => (
+              <button
+                key={index}
+                className={`indicator-dot ${index === currentSlide ? 'active' : ''}`}
+                onClick={() => {
+                  const scrollThreshold = document.querySelector('.hero-section').offsetHeight / (slides.length + 1)
+                  window.scrollTo({ top: index * scrollThreshold + 10, behavior: 'smooth' })
+                }}
+                aria-label={`Go to slide ${index + 1}`}
+              ></button>
+            ))}
           </div>
 
-          <h1 className='hero-title'>
-            Colleges of Health Teachers’ <br className='desktop-only' />
-            <span className='text-gradient'>Association of Ghana</span>
-          </h1>
-
-          <p className='hero-subtitle'>
-            We are a unified body of Public health training institution teachers
-            in Ghana, committed to advancing education, influencing policy, and
-            promoting the welfare of our members.
-          </p>
-
-          <div className='hero-ctas'>
-            <Link to='/membership' className='btn btn-primary btn-large'>
-              Join COHTAG
-            </Link>
-            <Link to='/about' className='btn btn-outline-light btn-large'>
-              Learn More
-            </Link>
-            <Link to='/contact' className='btn btn-text btn-large'>
-              Contact Us <ArrowRight size={20} />
-            </Link>
-          </div>
+          <AnimatePresence>
+            {currentSlide === 0 && (
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.8 }}
+                exit={{ opacity: 0 }}
+                className='scroll-down-hint'
+              >
+                <span>Scroll to Explore</span>
+                <ChevronDown size={24} />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </section>
 
@@ -148,8 +268,8 @@ const Home = () => {
                 View All Initiatives
               </Link>
             </div>
-            <div className='projects-placeholder'>
-              <span>Welfare & Projects</span>
+            <div className='projects-image-container'>
+              <img src={heroWelfare} alt='Welfare and Projects' className='projects-image' />
             </div>
           </div>
         </div>

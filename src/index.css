@@ -38,11 +38,17 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'Inter', sans-serif;
   color: var(--text-main);
   background-color: var(--neutral-muted-sand);
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -90,34 +96,35 @@ ul {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.75rem 1.5rem;
+  padding: 0.75rem 1.75rem;
   font-weight: 600;
-  border-radius: var(--radius-md);
+  border-radius: 9999px; /* Pill shape for modern look */
   border: none;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   font-size: 1rem;
+  letter-spacing: 0.025em;
 }
 
 .btn-primary {
-  background-color: var(--primary-green);
+  background: linear-gradient(135deg, var(--primary-green) 0%, var(--primary-green-dark) 100%);
   color: var(--neutral-white);
+  box-shadow: 0 4px 14px 0 rgba(10, 92, 54, 0.2);
 }
 
 .btn-primary:hover {
-  background-color: var(--primary-green-dark);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(10, 92, 54, 0.3);
 }
 
 .btn-accent {
-  background-color: var(--accent-gold);
+  background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-gold-dark) 100%);
   color: var(--neutral-white);
+  box-shadow: 0 4px 14px 0 rgba(212, 175, 55, 0.2);
 }
 
 .btn-accent:hover {
-  background-color: var(--accent-gold-dark);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
 }
 
 .btn-outline {
@@ -155,16 +162,19 @@ ul {
 /* Cards */
 .card {
   background-color: var(--neutral-white);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-  padding: 2rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: var(--radius-xl);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  padding: 2.5rem;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  border: 1px solid rgba(0, 0, 0, 0.02);
   border-top: 4px solid transparent;
+  position: relative;
+  overflow: hidden;
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(10, 92, 54, 0.08);
 }
 
 .card.border-green { border-top-color: var(--primary-green); }
