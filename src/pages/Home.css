@@ -2,12 +2,10 @@
 
 .home-wrapper {
   width: 100%;
-}
-
 /* Hero Section */
 .hero-section {
   position: relative;
-  height: 250vh; /* Scroll space */
+  height: 400vh; /* Increased scroll space for 3 screens */
   margin-top: -5rem; /* Sit under header */
   background-color: var(--primary-green-dark);
 }
@@ -31,6 +29,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  will-change: transform, opacity, filter;
 }
 
 .hero-container {
@@ -43,9 +42,14 @@
   max-width: 1200px;
   padding: 0 1.5rem;
   margin-top: 5rem;
+  pointer-events: none; /* Allow events to reach CTAs but not block layers */
 }
 
-@media (max-width: 1023px) {
+.hero-content-wrapper {
+  max-width: 800px;
+  pointer-events: auto; /* Re-enable for content */
+}
+
   .hero-container {
     flex-direction: column;
     text-align: center;

@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import React, { useState, useEffect, useRef } from 'react'
+import { motion, AnimatePresence, useScroll, useTransform, useSpring } from 'framer-motion'
+import { useLenis } from 'lenis/react'
 import {
   ArrowRight,
   BookOpen,
@@ -57,83 +58,130 @@ const slides = [
   },
 ]
 
+const HeroScreen = ({ slide, progress, range }) => {
+  const opacity = useTransform(progress, range.opacity.input, range.opacity.output)
+  const scale = useTransform(progress, range.scale.input, range.scale.output)
+  const blur = useTransform(progress, range.blur.input, range.blur.output)
+  const y = useTransform(progress, range.y.input, range.y.output)
+  
+  // Content animations for staggered feel
+  const contentOpacity = useTransform(progress, range.contentOpacity.input, range.contentOpacity.output)
+  const contentY = useTransform(progress, range.contentY.input, range.contentY.output)
+
+  return (
+    <motion.div
+      style={{ 
+        opacity,
+        scale,
+        filter: useTransform(blur, (v) => `blur(${v}px)`),
+        backgroundImage: `linear-gradient(rgba(7, 70, 40, 0.8), rgba(7, 70, 40, 0.9)), url(${slide.image})`,
+        zIndex: useTransform(progress, (v) => {
+          // Keep active slide on top
+          if (v >= range.opacity.input[0] && v <= range.opacity.input[range.opacity.input.length - 1]) return 5;
+          return 1;
+        })
+      }}
+      className='hero-slide-bg'
+    >
+      <div className='container hero-container'>
+        <motion.div 
+          style={{ opacity: contentOpacity, y: contentY }}
+          className='hero-content-wrapper'
+        >
+          <div className='hero-badge'>
+            <span className='badge-dot'></span>
+            {slide.title}
+          </div>
+
+          <h1 className='hero-title'>{slide.heading}</h1>
+
+          <p className='hero-subtitle'>{slide.subtitle}</p>
+
+          <div className='hero-ctas'>
+            <Link to='/membership' className='btn btn-primary btn-large'>
+              Join COHTAG
+            </Link>
+            <Link to='/about' className='btn btn-outline-light btn-large'>
+              Learn More
+            </Link>
+            <Link to='/contact' className='btn btn-text btn-large'>
+              Contact Us <ArrowRight size={20} />
+            </Link>
+          </div>
+        </motion.div>
+      </div>
+    </motion.div>
+  )
+}
+
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0)
+  const lenis = useLenis()
+  const containerRef = useRef(null)
+  
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  })
+
+  // Smooth progress for cleaner animations
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  })
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPos = window.scrollY
-      const heroSection = document.querySelector('.hero-section')
-      if (heroSection) {
-        const sectionHeight = heroSection.offsetHeight
-        
-        // Calculate slide based on scroll
-        const scrollThreshold = sectionHeight / (slides.length + 1)
-        const slideIndex = Math.max(0, Math.min(
-          Math.floor(scrollPos / scrollThreshold),
-          slides.length - 1
-        ))
-        setCurrentSlide(slideIndex)
-      }
-    }
+    const unsubscribe = scrollYProgress.on('change', (v) => {
+      // 0 to 0.33 -> 0
+      // 0.33 to 0.66 -> 1
+      // 0.66 to 1 -> 2
+      const index = Math.min(Math.floor(v * 3), slides.length - 1)
+      setCurrentSlide(index)
+    })
+    return () => unsubscribe()
+  }, [scrollYProgress])
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  const ranges = [
+    {
+      opacity: { input: [0, 0.25, 0.35], output: [1, 1, 0] },
+      scale: { input: [0, 0.35], output: [1, 0.9] },
+      blur: { input: [0, 0.25, 0.35], output: [0, 0, 10] },
+      y: { input: [0, 0.35], output: [0, -50] },
+      contentOpacity: { input: [0, 0.2, 0.3], output: [1, 1, 0] },
+      contentY: { input: [0, 0.3], output: [0, -100] }
+    },
+    {
+      opacity: { input: [0.25, 0.35, 0.6, 0.7], output: [0, 1, 1, 0] },
+      scale: { input: [0.25, 0.35, 0.6, 0.7], output: [1.1, 1, 1, 0.9] },
+      blur: { input: [0.25, 0.35, 0.6, 0.7], output: [10, 0, 0, 10] },
+      y: { input: [0.25, 0.35, 0.6, 0.7], output: [50, 0, 0, -50] },
+      contentOpacity: { input: [0.3, 0.4, 0.55, 0.65], output: [0, 1, 1, 0] },
+      contentY: { input: [0.3, 0.4, 0.55, 0.65], output: [100, 0, 0, -100] }
+    },
+    {
+      opacity: { input: [0.6, 0.7, 1], output: [0, 1, 1] },
+      scale: { input: [0.6, 0.7, 1], output: [1.1, 1, 1] },
+      blur: { input: [0.6, 0.7, 1], output: [10, 0, 0] },
+      y: { input: [0.6, 0.7, 1], output: [50, 0, 0] },
+      contentOpacity: { input: [0.65, 0.75, 1], output: [0, 1, 1] },
+      contentY: { input: [0.65, 0.75, 1], output: [100, 0, 0] }
+    }
+  ]
 
   return (
     <div className='home-wrapper'>
       {/* Modern Hero Section */}
-      <section className='hero-section'>
+      <section ref={containerRef} className='hero-section'>
         <div className='hero-sticky-wrapper'>
-          <AnimatePresence mode='wait'>
-            <motion.div
-              key={currentSlide}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1, ease: 'easeInOut' }}
-              className='hero-slide-bg'
-              style={{ 
-                backgroundImage: `linear-gradient(rgba(7, 70, 40, 0.8), rgba(7, 70, 40, 0.9)), url(${slides[currentSlide].image})` 
-              }}
-            >
-              <div className='container hero-container'>
-                <motion.div 
-                  initial={{ opacity: 0, y: 30, filter: 'blur(10px)' }}
-                  animate={{ opacity: 1, y: 0, filter: 'blur(0)' }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                  className='hero-content-wrapper'
-                >
-                  <motion.div 
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: 0.4 }}
-                    className='hero-badge'
-                  >
-                    <span className='badge-dot'></span>
-                    {slides[currentSlide].title}
-                  </motion.div>
-
-                  <h1 className='hero-title'>{slides[currentSlide].heading}</h1>
-
-                  <p className='hero-subtitle'>{slides[currentSlide].subtitle}</p>
-
-                  <div className='hero-ctas'>
-                    <Link to='/membership' className='btn btn-primary btn-large'>
-                      Join COHTAG
-                    </Link>
-                    <Link to='/about' className='btn btn-outline-light btn-large'>
-                      Learn More
-                    </Link>
-                    <Link to='/contact' className='btn btn-text btn-large'>
-                      Contact Us <ArrowRight size={20} />
-                    </Link>
-                  </div>
-                </motion.div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
+          {slides.map((slide, index) => (
+            <HeroScreen 
+              key={index}
+              slide={slide}
+              progress={smoothProgress}
+              range={ranges[index]}
+            />
+          ))}
 
           {/* Vertical Slider Indicators */}
           <div className='hero-indicators'>
@@ -142,8 +190,10 @@ const Home = () => {
                 key={index}
                 className={`indicator-dot ${index === currentSlide ? 'active' : ''}`}
                 onClick={() => {
-                  const scrollThreshold = document.querySelector('.hero-section').offsetHeight / (slides.length + 1)
-                  window.scrollTo({ top: index * scrollThreshold + 10, behavior: 'smooth' })
+                  const targetProgress = index / (slides.length - 1)
+                  // Offset by small amount to ensure it lands in the right range
+                  const targetScroll = targetProgress * (containerRef.current.offsetHeight - window.innerHeight)
+                  lenis?.scrollTo(targetScroll)
                 }}
                 aria-label={`Go to slide ${index + 1}`}
               ></button>

@@ -30,12 +30,6 @@ const Layout = () => {
         <div className='container header-container'>
           <Link to='/' className='logo-link'>
             <img src={logoImg} alt='COHTAG Logo' className='header-logo-img' />
-            <div className='logo-text'>
-              <span className='logo-abbr'>COHTAG</span>
-              <span className='logo-full'>
-                Colleges of Health Teachers' Association of Ghana
-              </span>
-            </div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -76,7 +70,7 @@ const Layout = () => {
         >
           <div className='mobile-nav-menu' onClick={(e) => e.stopPropagation()}>
             <div className='mobile-nav-header'>
-              <span className='logo-abbr'>COHTAG</span>
+              <img src={logoImg} alt='COHTAG Logo' className='header-logo-img' />
               <button
                 className='mobile-menu-close'
                 onClick={() => setIsMenuOpen(false)}
