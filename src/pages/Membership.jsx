@@ -1,4 +1,4 @@
-import { AlertCircle, CheckCircle, Loader, Upload } from 'lucide-react'
+import { AlertCircle, CheckCircle, Loader } from 'lucide-react'
 import { useState } from 'react'
 import './Membership.css'
 
@@ -439,85 +439,6 @@ const Membership = () => {
                         className='form-control'
                         placeholder='e.g. Senior Health Tutor'
                       />
-                    </div>
-                  </div>
-                </div>
-
-                <div className='form-section'>
-                  <h3 className='form-section-title'>Document Uploads</h3>
-                  <div className='upload-grid'>
-                    <div className='form-group'>
-                      <label className='form-label'>Passport Picture *</label>
-                      <div className='file-upload-wrapper'>
-                        <input
-                          type='file'
-                          name='passportPicture'
-                          onChange={handleFileChange}
-                          required
-                          accept='image/*'
-                          className='file-input'
-                          id='passportPicture'
-                        />
-                        <label htmlFor='passportPicture' className='file-label'>
-                          <Upload size={20} className='mb-2 text-primary' />
-                          <span>
-                            {files.passportPicture
-                              ? files.passportPicture.name
-                              : 'Choose Image'}
-                          </span>
-                        </label>
-                      </div>
-                    </div>
-
-                    <div className='form-group'>
-                      <label className='form-label'>PIN Upload *</label>
-                      <div className='file-upload-wrapper'>
-                        <input
-                          type='file'
-                          name='pinUpload'
-                          onChange={handleFileChange}
-                          required
-                          accept='.pdf,image/*'
-                          className='file-input'
-                          id='pinUpload'
-                        />
-                        <label htmlFor='pinUpload' className='file-label'>
-                          <Upload size={20} className='mb-2 text-primary' />
-                          <span>
-                            {files.pinUpload
-                              ? files.pinUpload.name
-                              : 'Choose File'}
-                          </span>
-                        </label>
-                      </div>
-                    </div>
-
-                    <div className='form-group'>
-                      <label className='form-label'>
-                        Professional Registration Certificate *
-                      </label>
-                      <div className='file-upload-wrapper'>
-                        <input
-                          type='file'
-                          name='registrationCertificate'
-                          onChange={handleFileChange}
-                          required
-                          accept='.pdf,image/*'
-                          className='file-input'
-                          id='registrationCertificate'
-                        />
-                        <label
-                          htmlFor='registrationCertificate'
-                          className='file-label'
-                        >
-                          <Upload size={20} className='mb-2 text-primary' />
-                          <span>
-                            {files.registrationCertificate
-                              ? files.registrationCertificate.name
-                              : 'Choose File'}
-                          </span>
-                        </label>
-                      </div>
                     </div>
                   </div>
                 </div>
