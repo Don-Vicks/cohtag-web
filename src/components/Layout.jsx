@@ -1,7 +1,7 @@
 import { Menu, X } from 'lucide-react'
 import { useState } from 'react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
-import logoImg from '../assets/logo.jpg'
+import logoImg from '../assets/logo.png'
 import './Layout.css'
 
 const Layout = () => {
@@ -112,7 +112,10 @@ const Layout = () => {
         <div className='container'>
           <div className='footer-grid'>
             <div className='footer-col'>
-              <h3>COHTAG</h3>
+              <div className='footer-brand'>
+                <img src={logoImg} alt='COHTAG Logo' className='footer-logo-img' />
+                <h3>COHTAG</h3>
+              </div>
               <p>
                 The Colleges of Health Teachers' Association of Ghana (COHTAG)
                 is the official body representing tutors and educators in health
