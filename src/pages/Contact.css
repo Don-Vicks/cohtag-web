@@ -39,6 +39,14 @@
   text-decoration: underline;
 }
 
+.contact-phone-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-left: 0;
+  list-style: none;
+}
+
 .social-icons-wrapper {
   display: flex;
   gap: 1rem;

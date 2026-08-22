@@ -153,8 +153,15 @@ const Layout = () => {
             <div className='footer-col'>
               <h3>Contact Us</h3>
               <p>National Secretariat, School of Hygiene, Korle Bu Accra</p>
-              <p>Email: cohtag@gmail.com</p>
-              <p>Phone: +233 (0) XX XXX XXXX</p>
+              <p>Email: <a href='mailto:cohtag@gmail.com' className='footer-contact-link'>cohtag@gmail.com</a></p>
+              <div className='footer-phones'>
+                <p>Phone:</p>
+                <ul>
+                  <li><a href='tel:+233246111695' className='footer-contact-link'>+233 (0) 24 611 1695</a></li>
+                  <li><a href='tel:+233249227206' className='footer-contact-link'>+233 (0) 24 922 7206</a></li>
+                  <li><a href='tel:+233591554888' className='footer-contact-link'>+233 (0) 59 155 4888</a></li>
+                </ul>
+              </div>
             </div>
           </div>
           <div className='footer-bottom'>

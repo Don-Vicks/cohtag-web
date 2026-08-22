@@ -238,6 +238,32 @@
   margin-bottom: 0.75rem;
 }
 
+.footer-contact-link {
+  color: rgba(255, 255, 255, 0.85);
+  transition: color 0.2s ease;
+}
+
+.footer-contact-link:hover {
+  color: var(--accent-gold);
+  text-decoration: underline;
+}
+
+.footer-phones {
+  margin-top: 0.5rem;
+}
+
+.footer-phones p {
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.footer-phones ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
 .footer-links {
   display: flex;
   flex-direction: column;

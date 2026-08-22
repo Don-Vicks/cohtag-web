@@ -48,17 +48,28 @@ const Contact = () => {
                 </div>
                 <div>
                   <h3 className='text-lg text-primary-dark mb-1'>
-                    Phone Number
+                    Phone Numbers
                   </h3>
                   <p className='text-muted mb-2'>
-                    Available Monday to Friday, 9am - 5pm.
+                    Available Monday to Friday, 8am - 5pm.
                   </p>
-                  <p className='contact-link font-bold text-lg'>
-                    +233 (0) XX XXX XXXX
-                  </p>
-                  <span className='text-sm text-muted italic'>
-                    (Line updating soon)
-                  </span>
+                  <ul className='contact-phone-list'>
+                    <li>
+                      <a href='tel:+233246111695' className='contact-link font-bold text-lg'>
+                        +233 (0) 24 611 1695
+                      </a>
+                    </li>
+                    <li>
+                      <a href='tel:+233249227206' className='contact-link font-bold text-lg'>
+                        +233 (0) 24 922 7206
+                      </a>
+                    </li>
+                    <li>
+                      <a href='tel:+233591554888' className='contact-link font-bold text-lg'>
+                        +233 (0) 59 155 4888
+                      </a>
+                    </li>
+                  </ul>
                 </div>
               </div>
 
