@@ -36,6 +36,26 @@ const faqData = [
   },
   {
     id: 6,
+    question: 'Do I lose the benefits of my existing association when I join COHTAG?',
+    answer: (
+      <div>
+        <p className="mb-2">
+          No. Joining COHTAG does not automatically mean that you lose the benefits you have already accrued from your existing association.
+        </p>
+        <p className="mb-2">
+          Any dues or subscriptions already paid to an association are generally not refundable.
+        </p>
+        <p className="mb-2">
+          However, where an association has transferable benefits, entitlements or accrued welfare benefits, these may be transferred or accessed in accordance with that association’s rules and procedures.
+        </p>
+        <p>
+          The Leadership of COHTAG will provide guidance and support to members on how to request, access or transfer eligible benefits from their existing associations, where applicable.
+        </p>
+      </div>
+    ),
+  },
+  {
+    id: 7,
     question: 'How do I register as a COHTAG member?',
     answer: (
       <span>
@@ -47,55 +67,55 @@ const faqData = [
     ),
   },
   {
-    id: 7,
+    id: 8,
     question: 'Is there a membership fee or monthly dues?',
     answer:
       'Yes. Applicable membership contributions and dues are determined in accordance with COHTAG’s approved structures. Current payment information will be communicated through official COHTAG channels.',
   },
   {
-    id: 8,
+    id: 9,
     question: 'What happens after I complete my membership registration?',
     answer:
       'Your information will be processed and verified, after which your membership details can be incorporated into the official COHTAG membership database.',
   },
   {
-    id: 9,
+    id: 10,
     question: 'Does COHTAG have regional structures?',
     answer:
       'Yes. COHTAG is developing regional and institutional structures to ensure effective communication, mobilisation, participation and representation across Health Training Institutions.',
   },
   {
-    id: 10,
+    id: 11,
     question: 'What professional development opportunities will COHTAG provide?',
     answer:
       'COHTAG intends to organise workshops, seminars, CPD programmes, research activities and other capacity-building opportunities relevant to Health Tutors.',
   },
   {
-    id: 11,
+    id: 12,
     question: 'How will COHTAG protect members’ interests?',
     answer:
       'COHTAG seeks to provide organised representation and advocacy on matters affecting Health Tutors and to engage relevant institutions and stakeholders through appropriate processes.',
   },
   {
-    id: 12,
+    id: 13,
     question: 'How can I become actively involved in COHTAG?',
     answer:
       'Members can participate through regional and institutional structures, committees, professional programmes, research activities, membership mobilisation and other Association initiatives.',
   },
   {
-    id: 13,
+    id: 14,
     question: 'How will COHTAG ensure accountability?',
     answer:
       'COHTAG operates through established governance structures and is committed to transparency, responsible financial management, reporting and accountability to its membership.',
   },
   {
-    id: 14,
+    id: 15,
     question: 'Where can I get official information about COHTAG?',
     answer:
       'Official information and updates can be obtained through the COHTAG website and authorised COHTAG communication channels.',
   },
   {
-    id: 15,
+    id: 16,
     question: 'How can I contact COHTAG?',
     answer: (
       <div>
