@@ -38,7 +38,7 @@
 }
 
 .faq-search-wrapper {
-  max-width: 600px;
+  max-width: 650px;
   margin: 2rem auto 0;
   position: relative;
 }
@@ -68,9 +68,87 @@
   color: var(--text-muted);
 }
 
+/* Category Tabs Navigation */
+.faq-categories-tabs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  max-width: 900px;
+  margin: 1.75rem auto 0;
+}
+
+.faq-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.125rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background-color: var(--neutral-white);
+  border: 1px solid rgba(10, 92, 54, 0.12);
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+}
+
+.faq-tab-btn:hover {
+  border-color: var(--primary-green);
+  color: var(--primary-green-dark);
+  background-color: rgba(10, 92, 54, 0.04);
+}
+
+.faq-tab-btn.active {
+  background-color: var(--primary-green);
+  color: var(--neutral-white);
+  border-color: var(--primary-green);
+  box-shadow: 0 4px 12px rgba(10, 92, 54, 0.2);
+}
+
+/* Grouped Categories */
+.faq-grouped-container {
+  max-width: 840px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.faq-category-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.faq-category-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid rgba(10, 92, 54, 0.15);
+}
+
+.faq-category-header h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary-green-dark);
+}
+
+.faq-category-badge {
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: var(--neutral-light-gray);
+  color: var(--text-muted);
+  padding: 0.2rem 0.65rem;
+  border-radius: 9999px;
+}
+
 .faq-list {
   max-width: 840px;
   margin: 0 auto;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -151,6 +229,15 @@
 
 .faq-answer p:last-child {
   margin-bottom: 0;
+}
+
+.faq-highlight-box {
+  background-color: rgba(10, 92, 54, 0.05);
+  border: 1px solid rgba(10, 92, 54, 0.15);
+  padding: 0.85rem 1.125rem;
+  border-radius: var(--radius-md);
+  color: var(--primary-green-dark);
+  font-size: 0.95rem;
 }
 
 .faq-contact-details {
