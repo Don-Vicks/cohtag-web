@@ -1,5 +1,6 @@
 import { AlertCircle, CheckCircle, Loader } from 'lucide-react'
 import { useState } from 'react'
+import FAQ from '../components/FAQ'
 import './Membership.css'
 
 const Membership = () => {
@@ -144,7 +145,7 @@ const Membership = () => {
       <header className='page-header'>
         <div className='container'>
           <h1>Membership</h1>
-          <p>Join the unified voice of health educators in Ghana.</p>
+          <p>Join the unified voice of health tutors in Ghana.</p>
         </div>
       </header>
 
@@ -329,12 +330,13 @@ const Membership = () => {
                     <div className='form-group'>
                       <label className='form-label'>Date of Birth *</label>
                       <input
-                        type='date'
+                        type='text'
                         name='dob'
                         value={formData.dob}
                         onChange={handleInputChange}
                         required
                         className='form-control'
+                        placeholder='DD/MM/YYYY'
                       />
                     </div>
                     <div className='form-group'>
@@ -486,6 +488,9 @@ const Membership = () => {
           </div>
         </div>
       </section>
+
+      {/* Frequently Asked Questions */}
+      <FAQ />
     </div>
   )
 }
