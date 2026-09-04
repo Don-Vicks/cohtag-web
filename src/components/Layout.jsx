@@ -16,6 +16,7 @@ const Layout = () => {
     { path: '/leadership', label: 'Leadership' },
     { path: '/projects', label: 'Projects & Initiatives' },
     { path: '/events', label: 'Events' },
+    { path: '/faq', label: 'FAQs' },
     { path: '/contact', label: 'Contact' },
   ]
 
@@ -136,6 +137,9 @@ const Layout = () => {
                 </li>
                 <li>
                   <Link to='/events'>Events & News</Link>
+                </li>
+                <li>
+                  <Link to='/faq'>Frequently Asked Questions (FAQs)</Link>
                 </li>
                 <li>
                   <a
